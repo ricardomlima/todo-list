@@ -1,0 +1,17 @@
+service: todo-list
+frameworkVersion: "3"
+
+custom:
+  tableName: "tasks-table-${sls:stage}"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  createTask:
+    handler: task/controller.createTask
+    events:
+      - httpApi:
+          method: GET
+          path: /
