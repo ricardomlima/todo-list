@@ -1,4 +1,4 @@
-name: setup-and-test
+name: Setup and Test
 description: "Checkout repo, install dependencies and run tests"
 inputs:
   aws-access-key-id:

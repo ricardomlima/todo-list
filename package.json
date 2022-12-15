@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "npx jest",
-    "deploy": "serverless deploy"
+    "deploy": "serverless deploy --stage production",
+    "deploy-dev": "serverless deploy --stage dev"
   },
   "dependencies": {
     "express": "^4.17.1",
