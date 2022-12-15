@@ -4,8 +4,8 @@ inputs:
   aws-access-key-id:
     description: "aws access key id"
     required: true
-  aws-secret-access-key-id:
-    description: "aws secret access key id"
+  aws-secret-access-key:
+    description: "aws secret access key"
     required: true
 runs:
   using: "composite"
