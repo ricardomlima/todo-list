@@ -3,7 +3,6 @@ description: "Checkout repo, install dependencies and run tests"
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@master
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
