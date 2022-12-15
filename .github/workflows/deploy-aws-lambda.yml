@@ -13,6 +13,5 @@ jobs:
       - uses: actions/checkout@master
       - name: setup-and-test
         uses: ./.github/actions/setup-and-test/
-        shell: bash
       - name: Serverless Deploy
         run: npm run-script deploy
