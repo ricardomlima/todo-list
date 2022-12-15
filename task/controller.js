@@ -1,7 +1,7 @@
 const createTask = async (event, context) => {
   return {
     statusCode: 201,
-    body: "ok",
+    body: "Hello World",
   };
 };
 
