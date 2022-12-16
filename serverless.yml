@@ -3,6 +3,14 @@ frameworkVersion: "3"
 
 custom:
   tableName: "tasks-table-${sls:stage}"
+  dynamodb:
+    stages:
+      - dev
+    start:
+      docker: true
+      port: 4566
+      migrate: true
+      noStart: true
 
 provider:
   name: aws
@@ -51,4 +59,5 @@ resources:
         TableName: ${self:custom.tableName}
 
 plugins:
+  - serverless-dynamodb-local
   - serverless-offline
