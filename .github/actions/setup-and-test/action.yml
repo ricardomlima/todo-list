@@ -25,6 +25,10 @@ runs:
         aws-region: eu-central-1
     - name: Setup DynamoDB Local
       uses: rrainn/dynamodb-action@v2.0.1
+      with:
+        optimizeDbBeforeStartup: true
+        port: 4566
+        cors: "*"
     - name: Setup serverless framework server
       shell: bash
       run: npx serverless offline
