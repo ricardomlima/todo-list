@@ -38,10 +38,6 @@ resources:
         AttributeDefinitions:
           - AttributeName: taskId
             AttributeType: S
-          - AttributeName: taskTitle
-            AttributeType: S
-          - AttributeName: taskDescription
-            AttributeType: S
         KeySchema:
           - AttributeName: taskId
             KeyType: HASH
