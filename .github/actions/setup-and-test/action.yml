@@ -29,9 +29,6 @@ runs:
         optimizeDbBeforeStartup: true
         port: 4566
         cors: "*"
-    - name: Setup serverless framework server
-      shell: bash
-      run: npx serverless offline
     - name: Run Tests
       shell: bash
-      run: npm run-script test
+      run: npm run test
