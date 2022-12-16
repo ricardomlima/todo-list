@@ -1,3 +1,22 @@
+const AWS = require("aws-sdk");
+
+const tasksTable = process.env.TASKS_TABLE;
+const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
+
+const getTasks = async (event, context) => {
+  const params = {
+    TableName: tasksTable,
+  };
+
+  const data = await dynamoDbClient.scan(params).promise();
+
+  const tasks = JSON.stringify(data.Items);
+  return {
+    statusCode: 200,
+    body: tasks,
+  };
+};
+
 const createTask = async (event, context) => {
   return {
     statusCode: 201,
@@ -5,4 +24,4 @@ const createTask = async (event, context) => {
   };
 };
 
-module.exports = { createTask };
+module.exports = { createTask, getTasks };

@@ -1,10 +1,9 @@
-const controller = require("../task/controller.js");
+const axios = require("axios");
 
-test("create task returns 'Hello World'", async () => {
-  const result = await controller.createTask();
-  const expectedResult = {
-    statusCode: 201,
-    body: "Hello World",
-  };
-  expect(result).toEqual(expectedResult);
+const ENDPOINT = "http://localhost:3000";
+
+test("get tasks returns empty list", async () => {
+  const response = await axios.get(`${ENDPOINT}/`);
+  const expectedResult = [];
+  expect(response.data).toEqual(expectedResult);
 });
