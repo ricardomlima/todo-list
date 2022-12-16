@@ -23,6 +23,11 @@ runs:
         aws-access-key-id: ${{ inputs.aws-access-key-id }}
         aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
         aws-region: eu-central-1
+    - name: Setup DynamoDB Local
+      uses: rrainn/dynamodb-action@v2.0.1
+    - name: Setup serverless framework server
+      shell: bash
+      run: npx serverless offline
     - name: Run Tests
       shell: bash
       run: npm run-script test
