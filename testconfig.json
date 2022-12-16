@@ -1,6 +1,6 @@
 {
   "accessKeyId": "fake",
   "secretAccessKey": "fake",
-  "region": "us-east-1",
+  "region": "localhost",
   "endpoint": "http://localhost:4566"
 }
