@@ -4,9 +4,13 @@ const tasksTable = process.env.TASKS_TABLE;
 const isOffline = process.env.IS_OFFLINE;
 
 let dynamoDbClient;
-
+let client;
 if (isOffline === "true") {
   dynamoDbClient = new AWS.DynamoDB.DocumentClient({
+    endpoint: "http://localhost:4566",
+    region: "localhost",
+  });
+  client = new AWS.DynamoDB({
     endpoint: "http://localhost:4566",
     region: "localhost",
   });
@@ -19,11 +23,12 @@ const getTasks = async (event, context) => {
     TableName: tasksTable,
   };
   // const data = await dynamoDbClient.scan(params).promise();
+  const data = await client.listTables().promise();
 
   // const tasks = JSON.stringify(data.Items);
   return {
     statusCode: 200,
-    body: isOffline,
+    body: JSON.stringify(data),
   };
 };
 
