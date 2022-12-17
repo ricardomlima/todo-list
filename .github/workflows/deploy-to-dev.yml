@@ -4,6 +4,22 @@ on:
     branches:
       - dev
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@master
+      - name: setup-and-test
+        uses: ./.github/actions/setup-and-test/
+        with:
+          aws-access-key-id: fake
+          aws-secret-access-key: fake
+          aws-region: localhost
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -12,8 +28,6 @@ jobs:
         node-version: [16.x]
     steps:
       - uses: actions/checkout@master
-      - name: setup-and-test
-        uses: ./.github/actions/setup-and-test/
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

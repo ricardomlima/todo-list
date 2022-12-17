@@ -1,6 +1,12 @@
 name: Setup and Test
 description: "Checkout repo, install dependencies and run tests"
-
+inputs:
+  aws-access-key-id:
+    description: "aws access key id"
+    required: true
+  aws-secret-access-key:
+    description: "aws secret access key"
+    required: true
 runs:
   using: "composite"
   steps:
@@ -11,6 +17,12 @@ runs:
     - name: Install Dependencies
       shell: bash
       run: npm install
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+        aws-region: ${{ inputs.aws-region }}
     - name: Setup DynamoDB Local
       uses: rrainn/dynamodb-action@v2.0.1
       with:
