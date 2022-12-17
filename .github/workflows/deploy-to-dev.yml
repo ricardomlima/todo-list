@@ -23,7 +23,6 @@ jobs:
         with:
           aws-access-key-id: fake
           aws-secret-access-key: fake
-          aws-region: us-east-1
 
   deploy:
     runs-on: ubuntu-latest
