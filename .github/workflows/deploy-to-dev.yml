@@ -20,9 +20,6 @@ jobs:
       - uses: actions/checkout@master
       - name: setup-and-test
         uses: ./.github/actions/setup-and-test/
-        with:
-          aws-access-key-id: fake
-          aws-secret-access-key: fake
 
   deploy:
     runs-on: ubuntu-latest
