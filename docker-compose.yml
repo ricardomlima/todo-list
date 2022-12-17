@@ -2,13 +2,7 @@ version: "3.0"
 
 services:
   localstack:
-    image: localstack/localstack:latest
-    environment:
-      - AWS_DEFAULT_REGION=ap-southeast-1
-      - EDGE_PORT=4566
-      - SERVICES=dynamodb
+    # image: localstack/localstack:latest
+    image: amazon/dynamodb-local
     ports:
-      - "4566:4566"
-    volumes:
-      - "${TMPDIR:-/tmp/localstack}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "4566:8000"

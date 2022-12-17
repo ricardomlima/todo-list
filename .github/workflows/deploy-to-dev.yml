@@ -6,6 +6,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      dynamodb:
+        image: amazon/dynamodb-local
+        ports:
+          - "4566:8000"
 
     strategy:
       matrix:
@@ -18,11 +23,11 @@ jobs:
         with:
           aws-access-key-id: fake
           aws-secret-access-key: fake
-          aws-region: localhost
+          aws-region: us-east-1
 
   deploy:
     runs-on: ubuntu-latest
-
+    needs: test
     strategy:
       matrix:
         node-version: [16.x]
