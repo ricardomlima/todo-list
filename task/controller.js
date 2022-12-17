@@ -18,12 +18,12 @@ const getTasks = async (event, context) => {
   const params = {
     TableName: tasksTable,
   };
-  const data = await dynamoDbClient.scan(params).promise();
+  // const data = await dynamoDbClient.scan(params).promise();
 
-  const tasks = JSON.stringify(data.Items);
+  // const tasks = JSON.stringify(data.Items);
   return {
     statusCode: 200,
-    body: tasks,
+    body: isOffline,
   };
 };
 
