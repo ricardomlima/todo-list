@@ -2,5 +2,5 @@
   "accessKeyId": "fake",
   "secretAccessKey": "fake",
   "region": "local",
-  "endpoint": "http://dynamodb:4566"
+  "endpoint": "http://localhost:4566"
 }
