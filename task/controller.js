@@ -8,11 +8,11 @@ let client;
 if (isOffline === "true") {
   dynamoDbClient = new AWS.DynamoDB.DocumentClient({
     endpoint: "http://localhost:4566",
-    region: "local",
+    region: "localhost",
   });
   client = new AWS.DynamoDB({
     endpoint: "http://localhost:4566",
-    region: "local",
+    region: "localhost",
   });
 } else {
   dynamoDbClient = new AWS.DynamoDB.DocumentClient();
