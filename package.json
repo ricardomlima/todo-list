@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "cross-env AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake jest",
+    "test": "cross-env AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake AWS_REGION=local jest",
     "deploy": "serverless deploy --stage production",
     "deploy-dev": "serverless deploy --stage dev"
   },
