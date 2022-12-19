@@ -8,7 +8,7 @@ let dynamoDbClient;
 if (isOffline === "true") {
   dynamoDbClient = new AWS.DynamoDB.DocumentClient({
     endpoint: "http://localhost:4566",
-    region: "localhost",
+    region: "local",
   });
 } else {
   dynamoDbClient = new AWS.DynamoDB.DocumentClient();
@@ -19,19 +19,40 @@ const getTasks = async (event, context) => {
     TableName: tasksTable,
   };
   const data = await dynamoDbClient.scan(params).promise();
-
   const tasks = JSON.stringify(data.Items);
+
   return {
     statusCode: 200,
     body: tasks,
   };
 };
 
-const createTask = async (event, context) => {
-  return {
-    statusCode: 201,
-    body: "Hello World",
-  };
+const createTask = async (event, _) => {
+  try {
+    const taskObject = JSON.parse(event.body);
+
+    const task = {
+      taskId: "jobim",
+      ...taskObject,
+    };
+
+    await dynamoDbClient
+      .put({
+        Item: task,
+        TableName: tasksTable,
+      })
+      .promise();
+
+    return {
+      statusCode: 201,
+      body: JSON.stringify(task),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: "error",
+    };
+  }
 };
 
 module.exports = { createTask, getTasks };
