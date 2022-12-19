@@ -1,6 +1,10 @@
 service: todo-list
 frameworkVersion: "3"
 
+package:
+  exclude:
+    - node_modules/**
+
 custom:
   tableName: "tasks-table-${sls:stage}"
   dynamodb:
