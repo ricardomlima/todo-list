@@ -7,6 +7,9 @@ inputs:
   aws-secret-access-key: # id of input
     description: "aws-secret-access-key"
     required: true
+  branch:
+    description: "branch name"
+    required: true
 
 runs:
   using: "composite"
@@ -26,7 +29,7 @@ runs:
         aws-region: us-east-1
     - name: Deploy test environment
       shell: bash
-      run: npm run deploy-branch --stage=pre-dev
+      run: npm run deploy-branch --stage=pre-${{ inputs.branch }}
     - name: Extract api url from deployment info
       uses: sergeysova/jq-action@v2
       id: api_url
@@ -34,7 +37,7 @@ runs:
         cmd: "jq .HttpApiUrl .build/stack.json -r"
     - name: Run Tests
       shell: bash
-      run: npm run test --stage=pre-dev --api_url=${{ steps.api_url.outputs.value }}
+      run: npm run test --stage=pre-${{ inputs.branch }} --api_url=${{ steps.api_url.outputs.value }}
     - name: Remove test environment
       shell: bash
-      run: npm run undeploy-branch --stage=pre-dev
+      run: npm run undeploy-branch --stage=pre-${{ inputs.branch }}

@@ -6,7 +6,6 @@
     "test": "STAGE=$npm_config_stage API_URL=$npm_config_api_url jest",
     "test-local": "IS_OFFLINE=true jest",
     "deploy": "serverless deploy --stage production",
-    "deploy-dev": "serverless deploy --stage dev",
     "deploy-branch": "serverless deploy --stage $npm_config_stage",
     "undeploy-branch": "serverless remove --stage $npm_config_stage"
   },
