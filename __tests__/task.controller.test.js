@@ -10,7 +10,7 @@ let endpoint;
 let dynamoDbClient;
 let tasksTable;
 
-if (isOffline === "true") {
+if (STAGE === "local") {
   dynamoDbClient = new AWS.DynamoDB.DocumentClient({
     endpoint: "http://localhost:4566",
     region: "local",
