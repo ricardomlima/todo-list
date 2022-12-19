@@ -52,6 +52,12 @@ functions:
       - httpApi:
           method: GET
           path: /
+  deleteTasks:
+    handler: task/controller.deleteTask
+    events:
+      - httpApi:
+          method: DELETE
+          path: /{taskId}
 resources:
   - ${file(resources/tasksTable.yml)}
 

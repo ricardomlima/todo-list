@@ -57,4 +57,27 @@ const createTask = async (event, _) => {
   }
 };
 
-module.exports = { createTask, getTasks };
+const deleteTask = async (event, _) => {
+  try {
+    const taskId = event.pathParameters.taskId;
+    const params = {
+      Key: {
+        taskId: taskId,
+      },
+      TableName: tasksTable,
+    };
+    await dynamoDbClient.delete(params).promise();
+
+    return {
+      statusCode: 200,
+      body: taskId,
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: "error",
+    };
+  }
+};
+
+module.exports = { createTask, getTasks, deleteTask };
