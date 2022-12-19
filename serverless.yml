@@ -37,6 +37,7 @@ provider:
   environment:
     TASKS_TABLE: ${self:custom.tableName}
     API_URL: !GetAtt HttpApi.ApiEndpoint
+    STAGE: "${sls:stage}"
 
 functions:
   createTask:

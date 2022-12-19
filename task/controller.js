@@ -2,10 +2,11 @@ const AWS = require("aws-sdk");
 
 const tasksTable = process.env.TASKS_TABLE;
 const isOffline = process.env.IS_OFFLINE;
+const STAGE = process.env.STAGE;
 
 let dynamoDbClient;
 
-if (isOffline === "true") {
+if (STAGE === "local") {
   dynamoDbClient = new AWS.DynamoDB.DocumentClient({
     endpoint: "http://localhost:4566",
     region: "local",
