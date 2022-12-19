@@ -11,6 +11,8 @@ custom:
       port: 4566
       migrate: true
       noStart: true
+  output:
+    file: .build/stack.json
 
 provider:
   name: aws
@@ -62,3 +64,4 @@ resources:
 plugins:
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-stack-output
