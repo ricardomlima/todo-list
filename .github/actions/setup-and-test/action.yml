@@ -27,6 +27,11 @@ runs:
     - name: Deploy test environment
       shell: bash
       run: npm run deploy-branch --stage=pre-dev
+    - name: Extract api url from deployment info
+      uses: sergeysova/jq-action@v2
+      id: api_url
+      with:
+        cmd: "jq .HttpApiUrl .build/stack.json -r"
     - name: Run Tests
       shell: bash
-      run: npm run test --stage=pre-dev
+      run: npm run test --stage=pre-dev --api_url=${{ steps.api_url.outputs.value }}
