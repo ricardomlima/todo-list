@@ -11,7 +11,7 @@ let dynamoDbClient;
 let tasksTable;
 
 if (isOffline === "true") {
-  dynamoDbClient = new AWS.DynamoDB({
+  dynamoDbClient = new AWS.DynamoDB.DocumentClient({
     endpoint: "http://localhost:4566",
     region: "local",
   });
@@ -19,11 +19,13 @@ if (isOffline === "true") {
   tasksTable = "tasks-table-local";
 } else {
   tasksTable = `tasks-table-${STAGE}`;
-  dynamoDbClient = new AWS.DynamoDB();
+  dynamoDbClient = new AWS.DynamoDB.DocumentClient();
   endpoint = process.env.API_URL;
 }
 
 const resetTable = async () => {
+  console.log("reseting table");
+
   await dynamoDbClient.deleteTable({ TableName: tasksTable }).promise();
 
   const tableData = yaml.load(
@@ -37,8 +39,22 @@ const resetTable = async () => {
     .promise();
 };
 
-afterEach(async () => {
-  await resetTable();
+const deleteTableItems = async () => {
+  let data = await dynamoDbClient.scan({ TableName: tasksTable }).promise();
+  for (const item of data.Items) {
+    await dynamoDbClient
+      .delete({
+        TableName: tasksTable,
+        Key: {
+          taskId: item.taskId,
+        },
+      })
+      .promise();
+  }
+};
+
+beforeEach(async () => {
+  await deleteTableItems();
 });
 
 test("get tasks returns empty list", async () => {
