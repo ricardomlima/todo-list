@@ -52,18 +52,7 @@ functions:
           method: GET
           path: /
 resources:
-  Resources:
-    TasksTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: taskId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: taskId
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-        TableName: ${self:custom.tableName}
+  - ${file(resources/tasksTable.yml)}
 
 plugins:
   - serverless-dynamodb-local
