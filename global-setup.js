@@ -1,7 +1,7 @@
 const { setup: setupDevServer } = require("jest-dev-server");
 
 module.exports = async function globalSetup() {
-  const stage = (process.env.STAGE && process.env.STAGE.length > 0) || "local";
+  const stage = (process.env.STAGE.length > 0 && process.env.STAGE) || "local";
   await setupDevServer({
     command: `serverless offline start --stage=${stage}`,
     launchTimeout: 50000,
