@@ -12,6 +12,7 @@ runs:
       shell: bash
       run: npm install
     - name: Deploy test environment
+      shell: bash
       run: npm run deploy-branch --stage=pre-dev
     - name: Run Tests
       shell: bash
