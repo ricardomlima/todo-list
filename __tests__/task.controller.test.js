@@ -2,6 +2,7 @@ const AWS = require("aws-sdk");
 const axios = require("axios");
 
 const isOffline = process.env.IS_OFFLINE;
+const STAGE = process.env.STAGE;
 
 let endpoint;
 let dynamoDbClient;
@@ -15,7 +16,7 @@ if (isOffline === "true") {
   endpoint = "http://localhost:3000";
   tasksTable = "tasks-table-local";
 } else {
-  tasksTable = process.env.TASKS_TABLE;
+  tasksTable = `tasks-table-${STAGE}`;
   dynamoDbClient = new AWS.DynamoDB.DocumentClient();
   endpoint = process.env.API_URL;
 }
