@@ -1,5 +1,12 @@
 name: Setup and Test
 description: "Checkout repo, install dependencies and run tests"
+inputs:
+  aws-access-key-id: # id of input
+    description: "aws-access-key-id"
+    required: true
+  aws-secret-access-key: # id of input
+    description: "aws-secret-access-key"
+    required: true
 
 runs:
   using: "composite"
@@ -11,6 +18,12 @@ runs:
     - name: Install Dependencies
       shell: bash
       run: npm install
+    - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ inputs.aws-access-key-id }}
+          aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+          aws-region: us-east-1
     - name: Deploy test environment
       shell: bash
       run: npm run deploy-branch --stage=pre-dev
