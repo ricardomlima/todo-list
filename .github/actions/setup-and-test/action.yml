@@ -35,3 +35,6 @@ runs:
     - name: Run Tests
       shell: bash
       run: npm run test --stage=pre-dev --api_url=${{ steps.api_url.outputs.value }}
+    - name: Remove test environment
+      shell: bash
+      run: undeploy-branch --stage=pre-dev

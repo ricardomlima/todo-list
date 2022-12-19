@@ -7,7 +7,8 @@
     "test-local": "IS_OFFLINE=true jest",
     "deploy": "serverless deploy --stage production",
     "deploy-dev": "serverless deploy --stage dev",
-    "deploy-branch": "serverless deploy --stage $npm_config_stage"
+    "deploy-branch": "serverless deploy --stage $npm_config_stage",
+    "undeploy-branch": "serverless remove --stage $npm_config_stage"
   },
   "dependencies": {
     "express": "^4.17.1",
