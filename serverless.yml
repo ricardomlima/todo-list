@@ -5,7 +5,7 @@ custom:
   tableName: "tasks-table-${sls:stage}"
   dynamodb:
     stages:
-      - dev
+      - local
     start:
       docker: true
       port: 4566
@@ -30,6 +30,7 @@ provider:
             - Fn::GetAtt: [TasksTable, Arn]
   environment:
     TASKS_TABLE: ${self:custom.tableName}
+    API_URL: !GetAtt HttpApi.ApiEndpoint
 
 functions:
   createTask:

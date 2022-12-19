@@ -6,12 +6,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      dynamodb:
-        image: amazon/dynamodb-local
-        ports:
-          - "4566:8000"
-
     strategy:
       matrix:
         node-version: [16.x]

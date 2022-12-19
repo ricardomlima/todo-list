@@ -11,6 +11,8 @@ runs:
     - name: Install Dependencies
       shell: bash
       run: npm install
+    - name: Deploy test environment
+      run: npm run deploy-branch --stage=pre-dev
     - name: Run Tests
       shell: bash
-      run: npm run test
+      run: npm run test --stage=pre-dev

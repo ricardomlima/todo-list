@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "cross-env AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake AWS_REGION=local jest",
+    "test": "STAGE=$npm_config_stage jest",
+    "test-local": "IS_OFFLINE=true jest",
     "deploy": "serverless deploy --stage production",
-    "deploy-dev": "serverless deploy --stage dev"
+    "deploy-dev": "serverless deploy --stage dev",
+    "deploy-branch": "serverless deploy --stage $npm_config_stage"
   },
   "dependencies": {
     "express": "^4.17.1",
