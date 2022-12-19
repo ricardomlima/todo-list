@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "STAGE=$npm_config_stage API_URL=$npm_config_api_url jest",
+    "test": "cross-env STAGE=$npm_config_stage API_URL=$npm_config_api_url jest",
     "test-local": "IS_OFFLINE=true STAGE=local jest",
     "deploy": "serverless deploy --stage production",
     "deploy-branch": "serverless deploy --stage $npm_config_stage",

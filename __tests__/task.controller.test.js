@@ -19,14 +19,17 @@ if (STAGE === "local") {
   tasksTable = "tasks-table-local";
 } else {
   tasksTable = `tasks-table-${STAGE}`;
-  dynamoDbClient = new AWS.DynamoDB.DocumentClient();
+  dynamoDbClient = new AWS.DynamoDB.DocumentClient({
+    region: "us-east-1",
+  });
   endpoint = process.env.API_URL;
 }
 
 const resetTable = async () => {
-  console.log("reseting table");
+  console.log("reseting table", tasksTable);
 
   await dynamoDbClient.deleteTable({ TableName: tasksTable }).promise();
+  // const tables = await dynamoDbClient.listTables().promise();
 
   const tableData = yaml.load(
     fs.readFileSync("./resources/tasksTable.yml"),
@@ -41,6 +44,7 @@ const resetTable = async () => {
 
 const deleteTableItems = async () => {
   let data = await dynamoDbClient.scan({ TableName: tasksTable }).promise();
+
   for (const item of data.Items) {
     await dynamoDbClient
       .delete({

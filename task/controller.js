@@ -12,7 +12,9 @@ if (STAGE === "local") {
     region: "local",
   });
 } else {
-  dynamoDbClient = new AWS.DynamoDB.DocumentClient();
+  dynamoDbClient = new AWS.DynamoDB.DocumentClient({
+    region: "us-east-1",
+  });
 }
 
 const getTasks = async (event, context) => {
