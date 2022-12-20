@@ -22,7 +22,7 @@ Install dependencies
 ---
 
 To get the project running locally run: <br/><br/>
-$ `docker compose up` <br/><br/>
+`docker compose up` <br/><br/>
 so that a dockerized instance of Dynamo DB will be available. After that run: <br/>
 
 `npm run start-local` <br/>
