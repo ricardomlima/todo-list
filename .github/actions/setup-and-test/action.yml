@@ -15,9 +15,10 @@ runs:
   using: "composite"
   steps:
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        cache: npm
     - name: Install Dependencies
       shell: bash
       run: npm install
