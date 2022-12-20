@@ -54,7 +54,7 @@ In case you want to use the complete application stack hosted in AWS you can dep
 
 `npm run deploy-branch --stage=custom-stage`
 
-Where instead of custom-stage you can use whatever name you like. You can access the endpoints after the deployment is complete through the output it generates with it's related URL. Make sure to replace the `localhost:3000` with the generated endpoint in the previous curl command defined in the invoking functions section.
+Where instead of custom-stage you can use whatever name you like. You can access the endpoints after the deployment is complete through the output it generates with it's related URL. The deployment output will be written to the following file: `./build/stack.json`. Make sure to replace the `localhost:3000` with the generated endpoint in the previous curl command defined in the invoking functions section.
 
 ## Automated tests
 
