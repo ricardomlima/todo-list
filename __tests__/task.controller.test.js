@@ -83,3 +83,29 @@ test("delete task endpoint deletes item from database", async () => {
 
   expect(getResponseAfterDelete.data).toEqual([]);
 });
+
+test("update task endpoint updates item from database", async () => {
+  const taskId = "random_id3";
+  const taskObject = {
+    taskId: taskId,
+    title: "my new task",
+  };
+  const postResponse = await axios.post(`${endpoint}/`, taskObject);
+
+  expect(postResponse.status).toEqual(201);
+  expect(postResponse.data).toEqual(taskObject);
+
+  const getResponse = await axios.get(`${endpoint}/`);
+
+  expect(getResponse.data).toEqual([taskObject]);
+
+  const newTaskObject = {
+    title: "my other new task",
+  };
+
+  await axios.post(`${endpoint}/${taskId}`, newTaskObject);
+
+  const getResponseAfterDelete = await axios.get(`${endpoint}/`);
+
+  expect(getResponseAfterDelete.data).toEqual([{ taskId, ...newTaskObject }]);
+});
